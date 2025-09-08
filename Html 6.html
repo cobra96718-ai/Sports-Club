@@ -1,0 +1,47 @@
+<html>
+    <head>
+    </head>
+    <body>
+      
+    <body style="background-color: aqua;">
+<h2>Task 1</h2>
+<button type="button"
+onclick="document.getElementById('B.TECH').innerHTML = Date()">
+Click me to display Date and Time.</button>
+
+<p id="B.TECH"></p>
+<h2>Task 2</h2>
+<h1>My JavaScript Page</h1>
+    <button onclick="sayHello()">Click here</button>
+
+    <script>
+      function sayHello() {
+        console.log("Hello  Welcome to B.TECH Class!");
+        alert("Hello  Welcome to B.TECH Class!");
+      }
+    </script>
+    <html>
+<head>
+  <title>Calculator  </title>
+</head>
+<body>
+  <h2>Task 3</h2>
+  <h2>Add any three Numbers</h2>
+  <input type="number" id="value1" placeholder="First Number"><br><br>
+  <input type="number" id="value2" placeholder="Second Number"><br><br>
+  <input type="number" id="value3" placeholder="third Number"><br><br>
+  <button onclick="sum()">Answere </button>
+  <p id="result"></p>
+
+  <script>
+    function sum() {
+      var a = parseFloat(document.getElementById('value1').value);
+      var b = parseFloat(document.getElementById('value2').value);
+      var sum = a + b;
+      document.getElementById('result').innerText = "Sum: " + sum;
+    }
+  </script>
+</body>
+</html>
+  </body>
+</html>

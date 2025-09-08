@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sachin's Bar and Restaurant Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://www.transparenttextures.com/patterns/chainmail.png'); /* Chain-style BG */
+      background-color: #1b1b1b;
+      color: white;
+    }
+
+    .menu-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ffcc00;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 5px;
+      margin-top: 40px;
+      color: #ffa500;
+    }
+
+    .menu-category {
+      margin-bottom: 20px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px dashed #ccc;
+      font-size: 1.1em;
+    }
+
+    .item:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background: #222;
+      font-size: 1.2em;
+      color: #ffcc00;
+      border-top: 2px solid #ffcc00;
+    }
+
+    .highlight {
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-container">
+    <h1>🍷 Sachin's Bar and Restaurant 🍽️</h1>
+
+    <!-- Whiskey Category -->
+    <div class="menu-category">
+      <h2>🥃 Whiskey </h2>
+      <div class="item"><span>Jack Daniel's</span><span>₹750</span></div>
+      <div class="item"><span>Johnnie Walker Black</span><span>₹950</span></div>
+      <div class="item"><span>Jameson Irish</span><span>₹850</span></div>
+      <div class="item"><span>Chivas Regal 12</span><span>₹1000</span></div>
+      <div class="item"><span>Ballantine’s Finest</span><span>₹700</span></div>
+    </div>
+
+    <!-- Cookies Category -->
+    <div class="menu-category">
+      <h2>🍪 Cookies</h2>
+      <div class="item"><span>Chocolate Chip</span><span>₹120</span></div>
+      <div class="item"><span>Oats & Raisins</span><span>₹110</span></div>
+      <div class="item"><span>Butter Almond</span><span>₹130</span></div>
+      <div class="item"><span>Peanut Crunch</span><span>₹100</span></div>
+      <div class="item"><span>Red Velvet Cookies</span><span>₹140</span></div>
+    </div>
+
+    <!-- Special Recipe Category -->
+    <div class="menu-category">
+      <h2>🍛 Special Recipes</h2>
+      <div class="item"><span>Butter Chicken Masala</span><span>₹350</span></div>
+      <div class="item"><span>Paneer Lababdar</span><span>₹280</span></div>
+      <div class="item"><span>Mutton Rogan Josh</span><span>₹400</span></div>
+      <div class="item"><span>Fish Tikka</span><span>₹390</span></div>
+      <div class="item"><span>Garlic Naan Combo</span><span>₹220</span></div>
+    </div>
+
+    <div class="footer">
+      © 2025 <span class="highlight">Sachin's Bar and Restaurant</span> | Cheers to Good Taste!
+    </div>
+  </div>
+
+</body>
+</html>

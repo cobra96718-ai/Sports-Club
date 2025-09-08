@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #07d4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .calculator {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 320px;
+      background: #222;
+    }
+    .display {
+      background: #000;
+      color: #0f0;
+      font-size: 2em;
+      padding: 20px;
+      text-align: right;
+    }
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    button {
+      font-size: 1.5em;
+      padding: 20px;
+      border: 1px solid #444;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #444;
+    }
+    button.operator {
+      background: #f48106;
+      color: #20d4f4;
+    }
+    button.equal {
+      background: #1abc9c;
+    }
+    button.clear {
+      background: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="keys">
+      <button class="clear">C</button>
+      <button class="del">DEL</button>
+      <button class="operator">%</button>
+      <button class="operator">/</button>
+
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="operator">*</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="operator">-</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="operator">+</button>
+
+      <button>0</button>
+      <button>.</button>
+      <button class="equal" colspan="2">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+    const keys = document.querySelector('.keys');
+
+    let currentInput = '';
+
+    keys.addEventListener('click', (e) => {
+      const target = e.target;
+      const value = target.textContent;
+
+      if (target.tagName !== 'BUTTON') return;
+
+      if (target.classList.contains('clear')) {
+        currentInput = '';
+        display.textContent = '0';
+        return;
+      }
+
+      if (target.classList.contains('del')) {
+        currentInput = currentInput.slice(0, -1);
+        display.textContent = currentInput || '0';
+        return;
+      }
+
+      if (target.classList.contains('equal')) {
+        try {
+          currentInput = eval(currentInput).toString();
+          display.textContent = currentInput;
+        } catch {
+          display.textContent = 'Error';
+          currentInput = '';
+        }
+        return;
+      }
+
+      currentInput += value;
+      display.textContent = currentInput;
+    });
+  </script>
+</body>
+</html>

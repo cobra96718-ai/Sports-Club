@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nio - AI Assistant</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+    body {background:#0a0a0a; color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; overflow:hidden;}
+    h1 {font-size:2rem; margin-bottom:20px; color:#00e5ff;}
+    .chatbox {width:90%; max-width:600px; height:60vh; background:rgba(255,255,255,0.05); border-radius:20px; padding:20px; overflow-y:auto; box-shadow:0 0 20px #00e5ff inset;}
+    .msg {margin:10px 0;}
+    .user {text-align:right; color:#00ff88;}
+    .nio {text-align:left; color:#00e5ff;}
+    .input-area {margin-top:20px; display:flex; width:90%; max-width:600px;}
+    input {flex:1; padding:10px; border:none; border-radius:10px 0 0 10px; outline:none;}
+    button {padding:10px 20px; border:none; background:#00e5ff; color:#000; font-weight:bold; cursor:pointer; border-radius:0 10px 10px 0;}
+    canvas {position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;}
+  </style>
+</head>
+<body>
+  <h1>Nio - AI Assistant</h1>
+  <div class="chatbox" id="chatbox"></div>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <canvas id="bg"></canvas>
+
+  <script>
+    const chatbox = document.getElementById("chatbox");
+
+    function addMessage(text, sender) {
+      let div = document.createElement("div");
+      div.className = "msg " + sender;
+      div.innerText = text;
+      chatbox.appendChild(div);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, "user");
+      input.value = "";
+
+      let response = await fetch("http://127.0.0.1:5000/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({question: text})
+      });
+      let data = await response.json();
+      addMessage(data.answer, "nio");
+    }
+
+    // Simple 3D animated background
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00e5ff";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
+
+<!-- Python Backend (Flask) - save as app.py and run with python app.py -->
+<!--
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import openai
+
+app = Flask(__name__)
+CORS(app)
+
+openai.api_key = "YOUR_API_KEY"
+
+@app.route('/ask', methods=['POST'])
+def ask():
+    data = request.get_json()
+    question = data.get("question")
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=question,
+        max_tokens=150
+    )
+    answer = response.choices[0].text.strip()
+    return jsonify({"answer": answer})
+
+if __name__ == "__main__":
+    app.run(debug=True)
+-->

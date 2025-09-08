@@ -1,0 +1,27 @@
+Overloading Memory Management Operators (new/delete)
+
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+class Point {
+public:
+    double x, y;
+    Point() : x(0), y(0) { cout << "Point created\n"; }
+    ~Point() { cout << "Point destroyed\n"; }
+
+    void* operator new(size_t size) {
+        cout << "Custom new for Point\n";
+        return malloc(size);
+    }
+    void operator delete(void* ptr) {
+        cout << "Custom delete for Point\n";
+        free(ptr);
+    }
+};
+
+int main() {
+    Point* p = new Point();
+    delete p;
+    return 0;
+}
